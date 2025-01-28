@@ -395,6 +395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotateSpeed: 100
+  _isRotating: 1
 --- !u!65 &771240859
 BoxCollider:
   m_ObjectHideFlags: 0
