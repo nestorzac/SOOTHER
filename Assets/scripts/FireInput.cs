@@ -6,7 +6,7 @@ public class FireInput : MonoBehaviour
    {
     if (Input.GetMouseButtonDown(0))
     {
-        gameObject.GetComponent<GetWeapon>().Weapon.Shoot();
+        gameObject.GetComponent<GetWeapon>().Weapon?.Shoot();
     }
    }
 }

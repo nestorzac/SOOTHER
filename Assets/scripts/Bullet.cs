@@ -2,17 +2,21 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private Rigidbody _rigibody;
- [SerializeField]
- private float _bulletSpeed;        
+    private Rigidbody _rigbody;
 
-  private void OnEnable()
+ [SerializeField]
+ private float _bulletSpeed;  
+ 
+
+private Transform _bullePivot;
+  public void OnEnable()
   {
-    if (_rigibody == null)
+    if(_rigbody == null)
     {
-        _rigibody = gameObject.GetComponent<Rigidbody>();
-    }
-    _rigibody.AddForce(Vector3.forward * _bulletSpeed, ForceMode.Impulse);
+      _rigbody = gameObject.GetComponent<Rigidbody>();
+
+    } 
+    _rigbody.AddForce(transform.forward * _bulletSpeed, ForceMode.Impulse);
   }  
 
 
