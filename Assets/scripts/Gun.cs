@@ -1,6 +1,7 @@
 using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class Gun : MonoBehaviour
@@ -24,8 +25,34 @@ public class Gun : MonoBehaviour
     private int _currentBulletsNumber = 0;
     private Text _bulletsText;
 
+    private GetWeapon _getWeapon;
+
+    private void RemoveWeapon()
+    {
+        _getWeapon.RemoveWeapon();
+        _getWeapon = null;
+    }
+
+    public void PickUpWeapon(GetWeapon getWeapon)
+    {
+        _getWeapon = getWeapon;
+        _totalBulletsNumber = _maxBulletsNumber;
+        Reload();
+        _weaponAnimator.Play("GetWeapon");
+        UpdateBulletsText();
+
+    }
+
     public void Shoot()
     {
+        if(_currentBulletsNumber == 0)
+        {
+            if(_totalBulletsNumber == 0)
+            {
+                RemoveWeapon();
+            }
+            return;
+        }
         _weaponAnimator.Play("Shoot", -1, 0f);
         GameObject.Instantiate(_bullet, _bulletPivont.position, _bulletPivont.rotation);
         _currentBulletsNumber--;
@@ -42,6 +69,12 @@ public class Gun : MonoBehaviour
 
     public void Reload()
     {
+        if(_currentBulletsNumber == _cartridgeBulletsNumber || _totalBulletsNumber == 0)
+        {
+            return;
+        }
+
+        int bulletsNeeded = _cartridgeBulletsNumber - _currentBulletsNumber;
         
     if (_totalBulletsNumber >= _cartridgeBulletsNumber)
     {
@@ -55,6 +88,7 @@ public class Gun : MonoBehaviour
 
     _totalBulletsNumber -= _currentBulletsNumber;
     UpdateBulletsText();
+    _weaponAnimator.Play("Reload");
 
     }
     
@@ -62,7 +96,7 @@ public class Gun : MonoBehaviour
     {
         if (_bulletsText == null)
         {
-          _bulletsText = GameObject.Find("BulletsText").GetComponent<Text>();
+          _bulletsText = _getWeapon.GetComponent<UIController>().BulletsText;
         }
 
         _bulletsText.text = _currentBulletsNumber + "/" + _totalBulletsNumber;
