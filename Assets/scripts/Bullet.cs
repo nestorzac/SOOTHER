@@ -6,6 +6,13 @@ public class Bullet : MonoBehaviour
 
  [SerializeField]
  private float _bulletSpeed;  
+
+ [SerializeField]
+ private int damage = 1;
+ private int Damage
+ {
+  get{return Damage;}
+ }
  
 
 private Transform _bullePivot;

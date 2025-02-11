@@ -53,6 +53,7 @@ public class Gun : MonoBehaviour
             }
             return;
         }
+        SoundManager.instance.Play("fire");
         _weaponAnimator.Play("Shoot", -1, 0f);
         GameObject.Instantiate(_bullet, _bulletPivont.position, _bulletPivont.rotation);
         _currentBulletsNumber--;

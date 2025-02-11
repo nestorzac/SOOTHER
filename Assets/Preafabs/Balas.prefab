@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7770887414440545076}
   m_Layer: 0
   m_Name: Balas
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -150,4 +150,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletSpeed: 50
-  _bullePivot: {fileID: 0}
